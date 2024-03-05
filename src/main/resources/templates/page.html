@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasksByPage}">
+        <td th:text="${task.getId()}">VALUE</td>
+        <td th:text="${task.getDescription()}">VALUE</td>
+        <td th:text="${task.getStatus()}">VALUE</td>
+        <td>
+            <form th:method="GET" th:action="@{/tasks/{id}/edit(id=${task.getId()})}" >
+                <input type="submit" value="Update"/>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/tasks/{id}(id=${task.getId()})}" >
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

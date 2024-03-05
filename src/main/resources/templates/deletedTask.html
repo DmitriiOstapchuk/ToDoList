@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DeletedTask</title>
+</head>
+<body>
+<p th:text="'Task with id = ' + ${deletedTask.getId()} + ', description = ' + ${deletedTask.getDescription()} + ' and status = ' + ${deletedTask.getStatus()} + ' was deleted successfully.'"></p>
+<a th:href="@{/previous-page}">
+    <button type="button">To previous page</button>
+</a>
+</body>
+</html>

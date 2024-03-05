@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/tasks/{id}(id=${editedTask.getId()})}" th:object="${editedTask}">
+  <label for="description">Enter description: </label>
+  <input type="text" th:field="*{description}" id="description"/>
+  <label for="status">Choose status: </label>
+  <select id="status" name="status">
+    <option th:each="status : ${T(com.ostapchuk.dmitrii.ToDoList.data.entity.Status).values()}"
+            th:value="${status}"
+            th:text="${#strings.capitalize(status.name())}">
+    </option>
+  </select>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+</body>
+</html>
