@@ -31,5 +31,11 @@
     </tr>
     </tbody>
 </table>
+<br/>
+<tr th:each="onePage : ${pages}">
+    <a th:href="@{/tasks/pages/{page}(page=${onePage})}" th:text="${onePage}">VALUE</a>
+</tr>
+
+
 </body>
 </html>

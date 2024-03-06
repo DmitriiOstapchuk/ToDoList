@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/tasks")
@@ -23,9 +26,17 @@ public class TaskController {
 
 
     @GetMapping("/pages/{page}")
-    public String findAll (@PathVariable int page, @RequestParam(defaultValue = "10") int count, Model model) {
-        Pageable pageable = PageRequest.of(page-1, count);
+    public String findAll (@PathVariable int page, @RequestParam(defaultValue = "10", name= "count") int tasksPerPage, Model model) {
+        Pageable pageable = PageRequest.of(page-1, tasksPerPage);
         model.addAttribute("tasksByPage", taskService.findAll(pageable));
+        List<Integer> pages = new ArrayList<>();
+        int numberOfPages = (int) Math.ceil((double) taskService.count() / tasksPerPage);
+        for (int i = 0; i < numberOfPages; i++) {
+            pages.add(i+1);
+        }
+        System.out.println(taskService.count());
+        pages.forEach(System.out::println);
+        model.addAttribute("pages", pages);
         return "page";
     }
 

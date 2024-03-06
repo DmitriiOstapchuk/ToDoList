@@ -14,6 +14,7 @@ public interface TaskService {
     void deleteById(String id);
     List<Task> findAll();
     void update(String id, Task task);
-    void patch(String id, Task task);
     Page<Task> findAll(Pageable pageable);
+
+    int count();
 }

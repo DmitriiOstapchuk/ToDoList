@@ -44,14 +44,15 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(existingTask);
     }
 
-    @Override
-    public void patch(String id, Task task) {
-
-    }
 
     @Override
     public Page<Task> findAll(Pageable pageable) {
         return taskRepository.findAll(pageable);
+    }
+
+    @Override
+    public int count() {
+        return (int) taskRepository.count();
     }
 
 
