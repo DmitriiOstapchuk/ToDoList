@@ -6,8 +6,8 @@
 </head>
 <body>
 <p th:text="'Task with id = ' + ${deletedTask.getId()} + ', description = ' + ${deletedTask.getDescription()} + ' and status = ' + ${deletedTask.getStatus()} + ' was deleted successfully.'"></p>
-<a th:href="@{/previous-page}">
-    <button type="button">To previous page</button>
+<a th:href="@{/tasks/pages/1}">
+    <button type="button">Ok</button>
 </a>
 </body>
 </html>

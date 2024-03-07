@@ -27,6 +27,7 @@ public class TaskController {
 
     @GetMapping("/pages/{page}")
     public String findAll (@PathVariable int page, @RequestParam(defaultValue = "10", name= "count") int tasksPerPage, Model model) {
+        model.addAttribute("newTask", new Task());
         Pageable pageable = PageRequest.of(page-1, tasksPerPage);
         model.addAttribute("tasksByPage", taskService.findAll(pageable));
         List<Integer> pages = new ArrayList<>();
@@ -40,7 +41,7 @@ public class TaskController {
         return "page";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/deleted")
     public String deleteById(@PathVariable String id, Model model) {
         Task deletedTask = taskService.findById(id);
         taskService.deleteById(id);
@@ -61,6 +62,16 @@ public class TaskController {
     @PatchMapping("/{id}")
     public String update (@PathVariable String id, @ModelAttribute Task editedTask) {
         taskService.update(id, editedTask);
-        return "redirect:/tasks/pages/1";
+        return "redirect:/tasks/pages/" + getNumberOfPages();
+    }
+
+    @PostMapping
+    public String save(@ModelAttribute(name="newTask") Task newTask) {
+        taskService.save(newTask);
+        return "redirect:/tasks/pages/" + getNumberOfPages();
+    }
+
+    public int getNumberOfPages () {
+        return (int) Math.ceil((double) taskService.count() / 10);
     }
 }

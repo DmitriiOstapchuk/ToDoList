@@ -24,13 +24,28 @@
             </form>
         </td>
         <td>
-            <form th:method="DELETE" th:action="@{/tasks/{id}(id=${task.getId()})}" >
+            <form th:method="DELETE" th:action="@{/tasks/{id}/deleted(id=${task.getId()})}" >
                 <input type="submit" value="Delete"/>
             </form>
         </td>
     </tr>
     </tbody>
 </table>
+<br/>
+<p>Add new task:</p>
+<form th:method="POST" th:action="@{/tasks}" th:object="${newTask}">
+    <label for="description">Enter description: </label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <label for="status">Choose status: </label>
+    <select id="status" name="status">
+        <option th:each="status : ${T(com.ostapchuk.dmitrii.ToDoList.data.entity.Status).values()}"
+                th:value="${status}"
+                th:text="${#strings.capitalize(status.name())}">
+        </option>
+    </select>
+    <br/>
+    <input type="submit" value="Create!"/>
+</form>
 <br/>
 <tr th:each="onePage : ${pages}">
     <a th:href="@{/tasks/pages/{page}(page=${onePage})}" th:text="${onePage}">VALUE</a>
