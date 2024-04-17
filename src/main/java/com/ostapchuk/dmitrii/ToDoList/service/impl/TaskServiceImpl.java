@@ -31,10 +31,6 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.deleteById(id);
     }
 
-    @Override
-    public List<Task> findAll() {
-        return taskRepository.findAll();
-    }
 
     @Override
     public void update(String id, Task task) {

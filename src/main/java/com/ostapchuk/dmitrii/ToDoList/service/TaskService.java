@@ -12,7 +12,6 @@ public interface TaskService {
     Task findById(String id);
     void save(Task task);
     void deleteById(String id);
-    List<Task> findAll();
     void update(String id, Task task);
     Page<Task> findAll(Pageable pageable);
 

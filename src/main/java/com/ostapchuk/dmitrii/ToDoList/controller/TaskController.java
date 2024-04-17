@@ -18,11 +18,6 @@ import java.util.List;
 public class TaskController {
     private final TaskService taskService;
 
-//    @GetMapping
-//    public String findAll(Model model) {
-//        model.addAttribute("allTasks", taskService.findAll());
-//        return "page1";
-//    }
 
 
     @GetMapping("/pages/{page}")
